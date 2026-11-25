@@ -7,11 +7,12 @@ import { ACCESS_TOKEN_COOKIE } from '@/features/auth/utils/session';
 export function proxy(req: NextRequest) {
   const hasSession = req.cookies.has(ACCESS_TOKEN_COOKIE);
 
-  if (req.nextUrl.pathname.startsWith('/dashboard') && !hasSession) {
-    const signInUrl = req.nextUrl.clone();
-    signInUrl.pathname = '/auth/sign-in';
-    return NextResponse.redirect(signInUrl);
-  }
+  // Sementara di-bypass untuk preview UI slicing tanpa login
+  // if (req.nextUrl.pathname.startsWith('/dashboard') && !hasSession) {
+  //   const signInUrl = req.nextUrl.clone();
+  //   signInUrl.pathname = '/auth/sign-in';
+  //   return NextResponse.redirect(signInUrl);
+  // }
 
   return NextResponse.next();
 }
